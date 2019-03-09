@@ -2,10 +2,15 @@ package main
 
 import (
 	"fmt"
+
 	"github.com/dgrijalva/jwt-go"
 	"github.com/mmuflih/go-di-arch/app"
 	"github.com/mmuflih/go-httplib/httplib"
 )
+
+import "go.uber.org/dig"
+
+var _ = dig.Name
 
 func main() {
 	myrole := make(map[string][]string)

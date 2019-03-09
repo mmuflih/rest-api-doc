@@ -3,6 +3,7 @@ package container
 import (
 	"github.com/mmuflih/go-di-arch/httphandler/extra"
 	"github.com/mmuflih/go-di-arch/httphandler/ping"
+	"github.com/mmuflih/go-di-arch/httphandler/user"
 	"go.uber.org/dig"
 )
 
@@ -21,5 +22,19 @@ func BuildHandlerProvider(c *dig.Container) *dig.Container {
 	if err := c.Provide(extra.NewP404Handler); err != nil {
 		panic(err)
 	}
+
+	if err := c.Provide(user.NewAddHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewEditHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewGetHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewListHandler); err != nil {
+		panic(err)
+	}
+
 	return c
 }

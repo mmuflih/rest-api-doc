@@ -1,7 +1,9 @@
 /vendor
 /env.json
+/dbconfig.yml
 images/*
 .history
 tags
 glide.lock
 go-di-arch
+tmp/*

@@ -2,6 +2,7 @@ package container
 
 import (
 	"github.com/mmuflih/go-di-arch/context/ping"
+	"github.com/mmuflih/go-di-arch/context/user"
 	"go.uber.org/dig"
 )
 
@@ -16,5 +17,19 @@ func BuildUseCaseProvider(c *dig.Container) *dig.Container {
 	if err := c.Provide(ping.NewPingUsecase); err != nil {
 		panic(err)
 	}
+
+	if err := c.Provide(user.NewAddUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewEditUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewGetUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewListUsecase); err != nil {
+		panic(err)
+	}
+
 	return c
 }
