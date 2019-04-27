@@ -6,8 +6,8 @@
 - fresh https://github.com/gravityblast/fresh
 
 ## How to Use
-    git clone https://github.com/mmuflih/go-di-arch.git
-    cd go-di-arch
+    git clone https://github.com/mmuflih/rest-api-doc.git
+    cd rest-api-doc
     glide install
     cp env.json.example env.json
     cp dbconfig.yml.example dbconfig.yml

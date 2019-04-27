@@ -1,8 +1,8 @@
 package user
 
 import (
-	"github.com/mmuflih/go-di-arch/domain/model"
-	"github.com/mmuflih/go-di-arch/lib"
+	"github.com/mmuflih/rest-api-doc/domain/model"
+	"github.com/mmuflih/rest-api-doc/lib"
 )
 
 /**
@@ -26,7 +26,7 @@ type listResponse struct {
 
 func newListResponse(u *model.User) listResponse {
 	return listResponse{
-		u.ID, u.Email, u.Name, u.Phone, u.Password, u.Role, u.LastLogin.Format(lib.YMDHMS),
+		u.ID.String(), u.Email, u.Name, u.Phone, u.Password, u.Role, u.LastLogin.Format(lib.YMDHMS),
 		u.CreatedAt.Format(lib.YMDHMS), u.UpdatedAt.Format(lib.YMDHMS),
 	}
 }

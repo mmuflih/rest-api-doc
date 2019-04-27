@@ -1,7 +1,7 @@
 package ping
 
 import (
-	"github.com/mmuflih/go-di-arch/context/ping"
+	"github.com/mmuflih/rest-api-doc/context/ping"
 	"net/http"
 
 	"github.com/mmuflih/go-httplib/httplib"

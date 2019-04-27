@@ -1,8 +1,8 @@
 package container
 
 import (
-	"github.com/mmuflih/go-di-arch/context/ping"
-	"github.com/mmuflih/go-di-arch/context/user"
+	"github.com/mmuflih/rest-api-doc/context/ping"
+	"github.com/mmuflih/rest-api-doc/context/user"
 	"go.uber.org/dig"
 )
 

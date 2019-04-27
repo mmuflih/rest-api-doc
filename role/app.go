@@ -1,4 +1,4 @@
-package app
+package role
 
 /**
  * Created by Muhammad Muflih Kholidin
@@ -7,6 +7,5 @@ package app
  * at: 2019-02-06 19:47
 **/
 
-const ADMIN = "administrator"
-const LEADER = "leader"
-const USER = "user"
+const BACKEND = "backend"
+const FRONTEND = "frontend"

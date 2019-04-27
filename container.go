@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/mmuflih/go-di-arch/container"
+	"github.com/mmuflih/rest-api-doc/container"
 	"go.uber.org/dig"
 )
 

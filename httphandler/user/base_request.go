@@ -1,6 +1,6 @@
 package user
 
-import "github.com/mmuflih/go-di-arch/lib"
+import "github.com/mmuflih/rest-api-doc/lib"
 
 /**
  * Created by Muhammad Muflih Kholidin

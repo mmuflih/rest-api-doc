@@ -3,7 +3,7 @@ package user
 import (
 	"net/http"
 
-	"github.com/mmuflih/go-di-arch/context/user"
+	"github.com/mmuflih/rest-api-doc/context/user"
 	"github.com/mmuflih/go-httplib/httplib"
 )
 

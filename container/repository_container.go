@@ -1,7 +1,7 @@
 package container
 
 import (
-	"github.com/mmuflih/go-di-arch/domain/repository/mysql"
+	"github.com/mmuflih/rest-api-doc/domain/repository/mongodb"
 	"go.uber.org/dig"
 )
 
@@ -13,7 +13,7 @@ import (
 **/
 
 func BuildRepositoryProvider(c *dig.Container) *dig.Container {
-	if err := c.Provide(mysql.NewUserRepo); err != nil {
+	if err := c.Provide(mongodb.NewUserService); err != nil {
 		panic(err)
 	}
 	return c

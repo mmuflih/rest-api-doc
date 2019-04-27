@@ -1,8 +1,8 @@
 package user
 
 import (
-	"github.com/mmuflih/go-di-arch/domain/model"
-	"github.com/mmuflih/go-di-arch/domain/repository"
+	"github.com/mmuflih/rest-api-doc/domain/model"
+	"github.com/mmuflih/rest-api-doc/domain/repository"
 )
 
 /**
@@ -34,13 +34,10 @@ func (au addUsecase) Add(req AddRequest) (error, AddResponse) {
 	u := model.NewUser(req.GetEmail(), req.GetName(), req.GetPhone(), req.GetPassword(),
 		req.GetRole())
 
-	tx, _ := au.repo.DBConn().Begin()
-	err := au.repo.Save(u, tx)
+	err := au.repo.Save(u)
 	if err != nil {
-		tx.Rollback()
 		return err, nil
 	}
-	err = tx.Commit()
 	return err, u
 }
 

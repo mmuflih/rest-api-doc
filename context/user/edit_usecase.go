@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/mmuflih/go-di-arch/domain/repository"
+	"github.com/mmuflih/rest-api-doc/domain/repository"
 	"github.com/pkg/errors"
 )
 
@@ -37,20 +37,16 @@ func (au editUsecase) Edit(req EditRequest) (error, EditResponse) {
 		return errors.New("User not found"), nil
 	}
 
-	tx, _ := au.repo.DBConn().Begin()
-
 	u.Name = req.GetName()
 	u.Phone = req.GetPhone()
 	u.Email = req.GetEmail()
 	u.Password = req.GetPassword()
 	u.Role = req.GetRole()
 
-	err = au.repo.Update(u, tx)
+	err = au.repo.Update(u)
 	if err != nil {
-		tx.Rollback()
 		return err, nil
 	}
-	err = tx.Commit()
 	return err, u
 }
 

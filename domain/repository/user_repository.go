@@ -1,9 +1,7 @@
 package repository
 
 import (
-	"database/sql"
-
-	"github.com/mmuflih/go-di-arch/domain/model"
+	"github.com/mmuflih/rest-api-doc/domain/model"
 )
 
 /**
@@ -14,9 +12,8 @@ import (
 **/
 
 type UserRepository interface {
-	DBConn() *sql.DB
-	Save(u *model.User, tx *sql.Tx) error
-	Update(u *model.User, tx *sql.Tx) error
+	Save(u *model.User)error
+	Update(u *model.User)error
 	Find(id string) (error, *model.User)
 	FindByEmail(email string) (error, *model.User)
 	FindAll(q string, page, size int) (error, []*model.User)

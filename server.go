@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/mmuflih/envgo/conf"
-	"github.com/mmuflih/go-di-arch/app"
+	"github.com/mmuflih/rest-api-doc/app"
 	"log"
 	"net/http"
 	"time"

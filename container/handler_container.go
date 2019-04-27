@@ -1,9 +1,9 @@
 package container
 
 import (
-	"github.com/mmuflih/go-di-arch/httphandler/extra"
-	"github.com/mmuflih/go-di-arch/httphandler/ping"
-	"github.com/mmuflih/go-di-arch/httphandler/user"
+	"github.com/mmuflih/rest-api-doc/httphandler/extra"
+	"github.com/mmuflih/rest-api-doc/httphandler/ping"
+	"github.com/mmuflih/rest-api-doc/httphandler/user"
 	"go.uber.org/dig"
 )
 

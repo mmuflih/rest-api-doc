@@ -1,27 +1,26 @@
 package model
 
 import (
+	"github.com/globalsign/mgo/bson"
 	"time"
-
-	"github.com/mmuflih/go-di-arch/lib"
 )
 
 type User struct {
-	ID        string    `json:"id"`
-	Email     string    `json:"email"`
-	Name      string    `json:"name"`
-	Phone     string    `json:"phone"`
-	Password  string    `json:"-"`
-	Role      string    `json:"role"`
-	LastLogin time.Time `json:"last_login"`
-	CreatedAt time.Time `json:"created_at"`
-	UpdatedAt time.Time `json:"updated_at"`
+	ID        bson.ObjectId    `json:"id" bson:"_id"`
+	Email     string    `json:"email" bson:"email"`
+	Name      string    `json:"name" bson:"name"`
+	Phone     string    `json:"phone" bson:"phone"`
+	Password  string    `json:"-" bson:"password"`
+	Role      string    `json:"role" bson:"role"`
+	LastLogin time.Time `json:"last_login" bson:"last_login"`
+	CreatedAt time.Time `json:"created_at" bson:"created_at"`
+	UpdatedAt time.Time `json:"updated_at" bson:"updated_at"`
 }
 
 func NewUser(email string, name string, phone string, password string, role string) *User {
 	now := time.Now()
 	user := new(User)
-	user.ID = lib.GenerateUUID()
+	user.ID = bson.NewObjectId()
 	user.Email = email
 	user.Name = name
 	user.Phone = phone

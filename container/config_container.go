@@ -1,12 +1,11 @@
 package container
 
 import (
-	"database/sql"
 	"github.com/globalsign/mgo"
 	"github.com/gorilla/mux"
 	"github.com/mmuflih/envgo/conf"
-	"github.com/mmuflih/go-di-arch/config"
 	"github.com/mmuflih/go-httplib/httplib"
+	"github.com/mmuflih/rest-api-doc/config"
 	"go.uber.org/dig"
 	"net/http"
 )
@@ -22,7 +21,7 @@ func BuildConfigProvider(c *dig.Container) *dig.Container {
 	var err error
 
 	if err = c.Provide(func() []byte {
-		return []byte("Go-DI-arch")
+		return []byte("12354p1d0c")
 	}); err != nil {
 		panic(err)
 	}
@@ -33,11 +32,6 @@ func BuildConfigProvider(c *dig.Container) *dig.Container {
 		panic(err)
 	}
 
-	if err = c.Provide(func(c conf.Config) (error, *sql.DB) {
-		return config.NewMysqlConn(c)
-	}); err != nil {
-		panic(err)
-	}
 	if err = c.Provide(func(c conf.Config) (error, *mgo.Database) {
 		return config.NewMongoDB(c)
 	}); err != nil {
