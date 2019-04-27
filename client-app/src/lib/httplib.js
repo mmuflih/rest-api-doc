@@ -25,7 +25,7 @@ export function getToken() {
 }
 
 export function clearToken() {
-    Vue.cookie.delete('rrauth')
+    Vue.cookie.delete('rest-doc')
 }
 
 function getAuthToken() {
@@ -37,7 +37,7 @@ function getAuthToken() {
 }
 
 function getAuthData() {
-    const auth = Vue.cookie.get('rrauth')
+    const auth = Vue.cookie.get('rest-doc')
     const authObj = JSON.parse(auth)
     var ts = Math.round((new Date()).getTime() / 1000);
     if (authObj && (ts < authObj.expires_in)) {

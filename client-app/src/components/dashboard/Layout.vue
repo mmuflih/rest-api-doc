@@ -4,9 +4,9 @@
             <!-- Logo -->
             <router-link :to="{path: '/'}" class="logo">
                 <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b>LTE</b></span>
+                <span class="logo-mini"><b>RFD</b></span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Vue Admin LTE</b></span>
+                <span class="logo-lg"><b>RestFul Doc</b></span>
             </router-link>
             <!-- Header Navbar: style can be found in header.less -->
             <nav class="navbar navbar-static-top">
@@ -177,15 +177,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img :src="avatar" class="user-image" alt="User Image" v-if="auth.data.file_id == 0">
-                                <img :src="auth.data.avatar_url" class="user-image" alt="User Image" v-if="auth.data.file_id > 0">
+                                <img :src="avatar" class="user-image" alt="User Image">
                                 <span class="hidden-xs">{{auth.data.name}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img :src="avatar" class="img-circle" alt="User Image" v-if="auth.data.file_id == 0">
-                                    <img :src="auth.data.avatar_url" class="img-circle" alt="User Image" v-if="auth.data.file_id > 0">
+                                    <img :src="avatar" class="img-circle" alt="User Image">
                                     <p>
                                         {{auth.data.name}}
                                         <small>Member since {{auth.data.created_at | formatDate}}</small>
@@ -193,9 +191,6 @@
                                 </li>
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
-                                    <div class="pull-left">
-                                        <router-link to="/profile" class="btn btn-default btn-flat">Profile</router-link>
-                                    </div>
                                     <div class="pull-right">
                                         <a href="#" class="btn btn-default btn-flat" @click="logout">Sign out</a>
                                     </div>
@@ -222,15 +217,14 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> All</a></li>
-                            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Pending</a></li>
-                            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Approved</a></li>
-                            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Exipred</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> All</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Pending</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Approved</a></li>
+                            <li><a href=""><i class="fa fa-circle-o"></i> Exipred</a></li>
                         </ul>
                     </li>
                     <li class="header">Settings</li>
                     <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Users</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Bank Accounts</span></a></li>
                 </ul>
             </section>
             <!-- /.sidebar -->

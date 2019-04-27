@@ -30,6 +30,24 @@ func BuildUseCaseProvider(c *dig.Container) *dig.Container {
 	if err := c.Provide(user.NewListUsecase); err != nil {
 		panic(err)
 	}
+	if err := c.Provide(user.NewGetTokenUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewGetAuthUserUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewRegisterUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewResetPasswordUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewSetPasswordUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(user.NewGenerateAdminUsecase); err != nil {
+		panic(err)
+	}
 
 	return c
 }

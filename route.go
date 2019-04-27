@@ -18,19 +18,25 @@ import (
 func InvokeRoute(route *mux.Router,
 	pingH ping.PingHandler, p404H extra.P404Handler, userAdd user.AddHandler,
 	userEdit user.EditHandler, userGet user.GetHandler, userList user.ListHandler,
+	registerH user.RegisterHandler, loginH user.LoginHandler,
 ) {
 	route.NotFoundHandler = http.HandlerFunc(p404H.Handle)
 	/** api v1 route */
 	apiV1 := route.PathPrefix("/api/v1").Subrouter()
 	pingRoute := apiV1.PathPrefix("/ping").Subrouter()
 	userRoute := apiV1.PathPrefix("/user").Subrouter()
+	loginRoute := userRoute.PathPrefix("/login").Subrouter()
 
 	/** ping */
 	pingRoute.HandleFunc("", pingH.Handle).Methods("GET")
 
 	/** user */
+	userRoute.HandleFunc("/register", registerH.Handle).Methods("POST")
 	userRoute.HandleFunc("", userAdd.Handle).Methods("POST")
 	userRoute.HandleFunc("", userList.Handle).Methods("GET")
 	userRoute.HandleFunc("/{id}", userEdit.Handle).Methods("PUT")
 	userRoute.HandleFunc("/{id}", userGet.Handle).Methods("GET")
+
+	/** login */
+	loginRoute.HandleFunc("", loginH.Handle).Methods("POST")
 }

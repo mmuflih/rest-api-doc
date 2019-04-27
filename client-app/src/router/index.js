@@ -4,8 +4,8 @@ import Cookie from 'vue-cookie'
 import Dashboard from '@/components/dashboard/Layout'
 import AuthLayount from '@/components/auth/Login'
 
-Vue.use(Router)
-Vue.use(Cookie)
+Vue.use(Router);
+Vue.use(Cookie);
 
 const routes =  [
     {
@@ -15,9 +15,9 @@ const routes =  [
         children: [
 
         ],
-        // meta: {
-        //     requireAuth: true
-        // }
+        meta: {
+            requireAuth: true
+        }
     },
     {
         path: '/login',
@@ -49,7 +49,7 @@ router.beforeEach((to, from, next) => {
 });
 
 function getAuth() {
-    const auth = Vue.cookie.get('rrauth')
+    const auth = Vue.cookie.get('rest-doc')
     const authObj = JSON.parse(auth)
     return authObj
 }
