@@ -15,7 +15,7 @@ const routes =  [
         component: Dashboard,
         children: [
             {
-                path: '/doc/:fid',
+                path: '/doc/:fid/:did',
                 component: Doc
             },
         ],

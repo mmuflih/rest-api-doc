@@ -62,7 +62,7 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li v-for="(m, ky) in v.child" :key="ky"><a :href="'#/doc/' + m.folder_id"><i class="fa fa-file-o text-green"></i><span> {{m.name}}</span></a></li>
+                            <li v-for="(m, ky) in v.child" :key="ky"><a :href="'#/doc/' + v.folder_id + '/' + m.folder_id"><i class="fa fa-file-o text-green"></i><span> {{m.name}}</span></a></li>
                             <li><a href="#" @click="newInputDoc(v.folder_id)">
                                 <i class="fa fa-file-o text-green" v-if="!showNewDoc"></i><span  v-if="!showNewDoc"> Create Document</span>
                                 <input type="text" class="form-control" @blur="hideNewDoc" v-if="showNewDoc" v-model="document.name" @keypress="createDocument"/>
@@ -83,17 +83,6 @@
         </aside>
 
         <div class="content-wrapper">
-            <section class="content-header">
-                <h1>
-                    Dashboard
-                    <small>Control panel</small>
-                </h1>
-                <ol class="breadcrumb">
-                    <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-                    <li class="active">Dashboard</li>
-                </ol>
-            </section>
-
             <section class="content">
                 <div class="row">
                     <router-view></router-view>
@@ -181,6 +170,9 @@ export default {
             if (e.keyCode == 13) {
                 HTTPAUTH.post("/api/v1/document", this.document).then(res => {
                     this.$toasted.success("Document created").goAway(2000)
+                    this.menus("");
+                    this.document = {};
+                    this.showNewDoc = false;
                 }).catch(eres => {
                     this.$toasted.error("Creating failed").goAway(2000)
                 })
