@@ -18,7 +18,7 @@ func main() {
 	myrole[role.BACKEND] = []string{role.BACKEND}
 	myrole[role.FRONTEND] = []string{role.FRONTEND, role.BACKEND}
 
-	httplib.InitJWTMiddlewareWithRole([]byte("rest-api-doc"), jwt.SigningMethodHS512, myrole)
+	httplib.InitJWTMiddlewareWithRole([]byte("12354p1d0c"), jwt.SigningMethodHS512, myrole)
 
 	c := BuildContainer()
 

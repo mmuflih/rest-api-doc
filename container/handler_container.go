@@ -1,6 +1,7 @@
 package container
 
 import (
+	"github.com/mmuflih/rest-api-doc/httphandler/document"
 	"github.com/mmuflih/rest-api-doc/httphandler/extra"
 	"github.com/mmuflih/rest-api-doc/httphandler/ping"
 	"github.com/mmuflih/rest-api-doc/httphandler/user"
@@ -39,6 +40,15 @@ func BuildHandlerProvider(c *dig.Container) *dig.Container {
 		panic(err)
 	}
 	if err := c.Provide(user.NewRegisterHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(document.NewCreateHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(document.NewDeleteHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(document.NewListHandler); err != nil {
 		panic(err)
 	}
 

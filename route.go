@@ -3,6 +3,11 @@ package main
 import (
 	"net/http"
 
+	"github.com/mmuflih/rest-api-doc/role"
+
+	jwt "github.com/mmuflih/go-httplib/httplib"
+	"github.com/mmuflih/rest-api-doc/httphandler/document"
+
 	"github.com/gorilla/mux"
 	"github.com/mmuflih/rest-api-doc/httphandler/extra"
 	"github.com/mmuflih/rest-api-doc/httphandler/ping"
@@ -19,6 +24,8 @@ func InvokeRoute(route *mux.Router,
 	pingH ping.PingHandler, p404H extra.P404Handler, userAdd user.AddHandler,
 	userEdit user.EditHandler, userGet user.GetHandler, userList user.ListHandler,
 	registerH user.RegisterHandler, loginH user.LoginHandler,
+	createDoc document.CreateHandler, deleteDoc document.DeleteHandler,
+	listDoc document.ListHandler,
 ) {
 	route.NotFoundHandler = http.HandlerFunc(p404H.Handle)
 	/** api v1 route */
@@ -26,6 +33,7 @@ func InvokeRoute(route *mux.Router,
 	pingRoute := apiV1.PathPrefix("/ping").Subrouter()
 	userRoute := apiV1.PathPrefix("/user").Subrouter()
 	loginRoute := userRoute.PathPrefix("/login").Subrouter()
+	documentRoute := apiV1.PathPrefix("/document").Subrouter()
 
 	/** ping */
 	pingRoute.HandleFunc("", pingH.Handle).Methods("GET")
@@ -39,4 +47,9 @@ func InvokeRoute(route *mux.Router,
 
 	/** login */
 	loginRoute.HandleFunc("", loginH.Handle).Methods("POST")
+
+	/** document */
+	documentRoute.HandleFunc("", jwt.JWTMidWithRole(createDoc.Handle, role.BACKEND)).Methods("POST")
+	documentRoute.HandleFunc("/{id}", jwt.JWTMidWithRole(deleteDoc.Handle, role.BACKEND)).Methods("DELETE")
+	documentRoute.HandleFunc("", jwt.JWTMidWithRole(listDoc.Handle, role.FRONTEND)).Methods("GET")
 }

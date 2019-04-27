@@ -9,7 +9,7 @@ package model
 
 type AccessToken struct {
 	AccessToken string      `json:"access_token"`
-	TokenType   string      `json:"type_type"`
+	TokenType   string      `json:"token_type"`
 	ExpiresIn   int64       `json:"expires_in"`
 	Data        interface{} `json:"data"`
 }

@@ -16,5 +16,8 @@ func BuildRepositoryProvider(c *dig.Container) *dig.Container {
 	if err := c.Provide(mongodb.NewUserService); err != nil {
 		panic(err)
 	}
+	if err := c.Provide(mongodb.NewDocumentMongoService); err != nil {
+		panic(err)
+	}
 	return c
 }

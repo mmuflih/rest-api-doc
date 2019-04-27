@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Cookie from 'vue-cookie'
 import Dashboard from '@/components/dashboard/Layout'
+import Doc from '@/components/dashboard/Document'
 import AuthLayount from '@/components/auth/Login'
 
 Vue.use(Router);
@@ -13,7 +14,10 @@ const routes =  [
         name: 'Dashboard',
         component: Dashboard,
         children: [
-
+            {
+                path: '/doc/:fid',
+                component: Doc
+            },
         ],
         meta: {
             requireAuth: true

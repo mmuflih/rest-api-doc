@@ -31,7 +31,7 @@ export function clearToken() {
 function getAuthToken() {
     var auth = getAuthData()
     if (auth) {
-        return auth.access_token;
+        return auth.token_type + " " + auth.access_token;
     }
     return "";
 }
