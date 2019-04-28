@@ -1,5 +1,7 @@
 <template>
     <div class="wrapper">
+        <div class="ov">
+        </div>
         <header class="main-header">
             <!-- Logo -->
             <router-link :to="{path: '/'}" class="logo">
@@ -17,6 +19,28 @@
 
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <span>{{project.name}}</span>
+                                <span class="label label-warning">{{projects.length}}</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header">You have {{projects.length}} projects</li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li v-for="(pv, pk) in projects" :key="pk">
+                                            <a href="#" @click="selectProject(pv)">
+                                                <i class="fa fa-gear"></i> {{pv.name}}
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer">
+                                    <a href="#">Add Project</a>
+                                </li>
+                            </ul>
+                        </li>
                         <!-- Messages: style can be found in dropdown.less-->
                         <!-- Tasks: style can be found in dropdown.less -->
                         <!-- User Account: style can be found in dropdown.less -->
@@ -58,20 +82,27 @@
                             <i class="fa fa-files-o"></i>
                             <span>{{v.name}}</span>
                             <span class="pull-right-container">
-                                <span class="label label-primary pull-right">4</span>
+                                <span class="label label-primary pull-right">{{v.child.length}}</span>
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                            <li v-for="(m, ky) in v.child" :key="ky"><a :href="'#/doc/' + v.folder_id + '/' + m.folder_id"><i class="fa fa-file-o text-green"></i><span> {{m.name}}</span></a></li>
-                            <li><a href="#" @click="newInputDoc(v.folder_id)">
-                                <i class="fa fa-file-o text-green" v-if="!showNewDoc"></i><span  v-if="!showNewDoc"> Create Document</span>
-                                <input type="text" class="form-control" @blur="hideNewDoc" v-if="showNewDoc" v-model="document.name" @keypress="createDocument"/>
-                            </a>
+                            <li v-for="(m, ky) in v.child" :key="ky">
+                                <a :href="'#/doc/' + v.folder_id + '/' + m.folder_id">
+                                    <span class="label label-primary" v-if="!m.method">GET</span>
+                                    <span class="label label-primary" v-if="m.method">{{m.method}}</span>
+                                    <span> {{m.name}}</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" @click="newInputDoc(v.folder_id)">
+                                    <span  v-if="!showNewDoc"> Create Document</span>
+                                    <input type="text" class="form-control" @blur="hideNewDoc" v-if="showNewDoc" v-model="document.name" @keypress="createDocument"/>
+                                </a>
                             </li>
                         </ul>
                     </li>
                     <li><a href="#" @click="newInputFolder">
-                        <i class="fa fa-file-o text-green" v-if="!showNewFolder"></i><span  v-if="!showNewFolder">Create Folder</span>
+                        <span  v-if="!showNewFolder">Create Folder</span>
                         <input type="text" class="form-control" @blur="hideNewFolder" v-if="showNewFolder" v-model="folder" @keypress="createFolder"/>
                     </a>
                     </li>
@@ -93,9 +124,10 @@
 </template>
 
 <script>
-import {clearToken, getToken} from '@/lib/httplib'
-import {HTTP, HTTPAUTH} from "../../lib/httplib";
-export default {
+    import {clearToken, getToken} from '@/lib/httplib'
+    import {HTTPAUTH} from "../../lib/httplib";
+
+    export default {
     data() {
         return {
             avatar: "./static/img/avatar.jpg",
@@ -114,14 +146,34 @@ export default {
 
             },
             folders: [],
-            documents: []
+            documents: [],
+            projects: [
+                {id: "prj001", name: "Project 01"},
+                {id: "prj002", name: "Project 02"},
+                {id: "prj003", name: "Project 03"},
+            ],
+            project: null,
+            loading: true
         }
     },
     created: function() {
-        this.getCookie()
-        this.menus("")
+        this.getCookie();
+        this.menus("");
+        this.getProjectCookie();
     },
     methods: {
+        getProjectCookie() {
+            let project = this.$cookie.get('project');
+            if (!project) {
+                this.project = {id: '000', name: 'Select Project'};
+                return
+            }
+            this.project = JSON.parse(project);
+        },
+        selectProject(project) {
+            this.$cookie.set('project', JSON.stringify(project));
+            this.project = project;
+        },
         menus(parentID) {
             HTTPAUTH.get("/api/v1/document?pid=" + parentID).then(res => {
                 this.folders = res.data.data
@@ -130,13 +182,15 @@ export default {
         logout() {
             var co = confirm("Yakin akan logout ?")
             if (co) {
-                clearToken()
-                location.href = "/"
+                this.redirectLogin()
             }
         },
+        redirectLogin() {
+            clearToken();
+            location.href = "/"
+        },
         getCookie() {
-            var tokenData = getToken()
-            this.auth = tokenData
+            this.auth = getToken()
         },
         newInputFolder() {
             this.showNewFolder = true
@@ -145,7 +199,7 @@ export default {
             this.showNewFolder = false
         },
         newInputDoc(folderID) {
-            this.showNewDoc = true
+            this.showNewDoc = true;
             this.document.parent_id = folderID
         },
         hideNewDoc() {
@@ -189,4 +243,17 @@ export default {
 </script>
 
 <style lang="css">
+    .ov {
+        position: fixed; /* Sit on top of the page content */
+        display: none; /* Hidden by default */
+        width: 100%; /* Full width (cover the whole page) */
+        height: 100%; /* Full height (cover the whole page) */
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+        z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+        cursor: pointer; /* Add a pointer on hover */
+    }
 </style>
