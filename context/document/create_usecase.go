@@ -27,7 +27,7 @@ type createUsecase struct {
 }
 
 func (cu createUsecase) Create(req CreateRequest) (error, interface{}) {
-	doc := model.NewDocument(req.GetID(), req.GetParentID(), req.GetName())
+	doc := model.NewDocument(req.GetID(), req.GetParentID(), req.GetName(), "GET")
 	err, d := cu.dRepo.FindByID(req.GetParentID())
 	if err == nil {
 		d.Child = append(d.Child, doc)

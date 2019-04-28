@@ -2,6 +2,7 @@ package container
 
 import (
 	"github.com/mmuflih/rest-api-doc/httphandler/document"
+	"github.com/mmuflih/rest-api-doc/httphandler/endpoint"
 	"github.com/mmuflih/rest-api-doc/httphandler/extra"
 	"github.com/mmuflih/rest-api-doc/httphandler/ping"
 	"github.com/mmuflih/rest-api-doc/httphandler/user"
@@ -49,6 +50,15 @@ func BuildHandlerProvider(c *dig.Container) *dig.Container {
 		panic(err)
 	}
 	if err := c.Provide(document.NewListHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewCreateHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewEditHandler); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewGetHandler); err != nil {
 		panic(err)
 	}
 

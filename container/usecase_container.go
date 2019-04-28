@@ -2,6 +2,7 @@ package container
 
 import (
 	"github.com/mmuflih/rest-api-doc/context/document"
+	"github.com/mmuflih/rest-api-doc/context/endpoint"
 	"github.com/mmuflih/rest-api-doc/context/ping"
 	"github.com/mmuflih/rest-api-doc/context/user"
 	"go.uber.org/dig"
@@ -56,6 +57,15 @@ func BuildUseCaseProvider(c *dig.Container) *dig.Container {
 		panic(err)
 	}
 	if err := c.Provide(document.NewListUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewCreateUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewEditUsecase); err != nil {
+		panic(err)
+	}
+	if err := c.Provide(endpoint.NewGetUsecase); err != nil {
 		panic(err)
 	}
 
